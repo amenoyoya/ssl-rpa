@@ -13,11 +13,13 @@
     - OS: Ubuntu 18.04 LTS
     - Python: `3.7.3`
         - Selenium: `3.141.0`
+        - Flask: `1.1.1`
     - Google Chrome: `75.0`
 - **サーバー環境**
     - OS: CentOS 7
     - Python: `3.6.5`
         - Selenium: `3.141.0`
+        - Flask: `1.1.1`
     - Google Chrome: `75.0`
 
 ### Prepare development environment

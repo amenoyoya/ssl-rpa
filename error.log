@@ -1,0 +1,7 @@
+INFO:werkzeug: * Running on http://0.0.0.0:2001/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 00:22:09] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 00:22:10] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 00:26:02] "GET / HTTP/1.1" 200 -

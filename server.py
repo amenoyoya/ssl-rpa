@@ -1,7 +1,9 @@
+import logging, time
+from typing import Tuple
 from lib.arch import is_windows
 from lib.webd import ChromeDriver, use_chrome_driver, load_url
+from flask import Flask, render_template
 from config import config
-import logging, time
 
 # ログ設定
 logging.basicConfig(filename='./error.log', level=logging.ERROR)
@@ -24,6 +26,15 @@ def sakura_apply_lets_encrypt(driver: ChromeDriver, domain: str) -> bool:
 
 # ---
 
+# flask application
+app = Flask(__name__)
+
+# home: /
+@app.route('/', methods=['GET'])
+def home() -> Tuple[str, int]:
+    return render_template('home.jinja')
+
+'''
 @use_chrome_driver({
     'driver': './driver/chromedriver75.exe' if is_windows() else './driver/chromedriver75'
 })
@@ -39,3 +50,6 @@ def main(driver: ChromeDriver) -> None:
             err: str = "Failed to apply Let's Encrypt: " + domain
             print(err)
             logging.error(err)
+'''
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=2001, debug=True)
