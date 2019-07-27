@@ -22,3 +22,14 @@ $ pip install -r requirements.txt
 # change executable chromedriver's permission
 $ chmod 755 ./driver/chromedriver75
 ```
+
+***
+
+## Design
+
+- さくらインターネット｜コンパネ｜ログイン: https://secure.sakura.ad.jp/rscontrol
+    - ドメイン名: `//input[@name="domain"]`
+        - 登録ドメイン名入力
+    - パスワード: `//input[@name="password"]`
+        - 登録パスワード入力
+    - 送信（ログイン）: `//input[@class="image"]`
