@@ -9,4 +9,11 @@
          
 {% block content %}
     <h1 class="title">さくらインターネット SSL申請自動化ツール</h1>
+    <button class="button is-link" @click="runTest">テスト実行</button>
+    <div v-if="screenshot">
+        <img :src="screenshot" class="image">
+    </div>
+    <div class="notification is-warning" v-if="error">
+        <pre><code>[[ error ]]</code></pre>
+    </div>
 {% endblock %}

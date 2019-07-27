@@ -13,7 +13,7 @@
     <body>
         {# コンテンツ部分 #}
         <section class="section">
-            <div class="container">
+            <div class="container" id="app">
                 {% block content %}
                 {% endblock %}
             </div>
@@ -32,5 +32,13 @@
             </p>
         </div>
         </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        {% if scripts != None %}
+            {% for script in scripts %}
+                <script src="{{ script }}"></script>
+            {% endfor %}
+        {% endif %}
     </body>
 </html>

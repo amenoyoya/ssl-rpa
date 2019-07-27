@@ -2,7 +2,7 @@ import logging, time
 from typing import Tuple
 from lib.arch import is_windows
 from lib.webd import ChromeDriver, use_chrome_driver, load_url
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from config import config
 
 # ログ設定
@@ -32,7 +32,23 @@ app = Flask(__name__)
 # home: /
 @app.route('/', methods=['GET'])
 def home() -> Tuple[str, int]:
-    return render_template('home.jinja')
+    return render_template('home.jinja',
+        scripts=['/static/js/home.js']
+    )
+
+# test api: /api/test
+@app.route('/api/test', methods=['GET'])
+def test_api() -> Tuple[str, int]:
+    res: dict = {}
+    @use_chrome_driver({
+        'driver': './driver/chromedriver75.exe' if is_windows() else './driver/chromedriver75',
+        'headless': True,
+        'size': (1960, 1024)
+    })
+    def api(driver: ChromeDriver) -> None:
+        load_url(driver, 'https://google.co.jp')
+        res['screenshot'] = 'data:image/png;base64,' + driver.find_element_by_xpath('//body').screenshot_as_base64
+    return jsonify(res)
 
 '''
 @use_chrome_driver({
