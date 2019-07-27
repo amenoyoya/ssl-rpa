@@ -9,7 +9,23 @@
          
 {% block content %}
     <h1 class="title">さくらインターネット SSL申請自動化ツール</h1>
-    <button class="button is-link" @click="runTest">テスト実行</button>
+    <div class="field">
+        <label class="label">ドメイン名</label>
+        <div class="control">
+            <input class="input is-primary" type="text" placeholder="example.sakura.ne.jp" v-model:value="login_domain">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">パスワード</label>
+        <div class="control">
+            <input class="input is-primary" type="password" v-model:value="login_password">
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-link" @click="login">ログイン</button>
+        </div>
+    </div>
     <div v-if="screenshot">
         <img :src="screenshot" class="image">
     </div>

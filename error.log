@@ -81,3 +81,120 @@ INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:23:44] "GET / HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:23:44] "GET /static/js/home.js HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:23:45] "GET /favicon.ico HTTP/1.1" 404 -
 INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:23:50] "GET /api/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:36:38] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:36:38] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:36:40] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:36:43] "GET /api/test HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:47:05] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:47:05] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:47:06] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:48:13] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:48:33] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:48:54] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:48:54] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:48:55] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:49:00] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 01:49:41] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:11:25] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:11:25] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:11:26] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:11:47] "POST /api/login HTTP/1.1" 401 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:03] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:03] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:03] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:07] "POST /api/login HTTP/1.1" 401 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:47] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:47] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:47] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:14:53] "POST /api/login HTTP/1.1" 401 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:15:37] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:16:48] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:16:48] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:16:48] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:16:53] "POST /api/login HTTP/1.1" 401 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:17:10] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:17:28] "POST /api/login HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:44:23] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:44:23] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:44:23] "GET /static/js/spin.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:44:24] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:45:15] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:45:15] "GET /static/js/spin.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:45:15] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:45:16] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:47:50] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:47:50] "GET /static/js/spin.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:47:50] "GET /static/js/home.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [28/Jul/2019 02:47:50] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:werkzeug: * Detected change in '/home/user/App/GitHub/ssl-rpa/server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 734-154-683

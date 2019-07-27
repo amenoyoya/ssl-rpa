@@ -6,18 +6,25 @@ const app = new Vue({
   delimiters: ["[[", "]]"],
   data() {
     return {
+      login_domain: '',
+      login_password: '',
       screenshot: false,
       error: false
     }
   },
   methods: {
-    async runTest() {
-      const res = await axios.get('/api/test');
-      if (res.status === 200) {
-        this.screenshot = res.data.screenshot
-      } else {
-        this.error = 'APIの実行に失敗しました'
-      }
+    login() {
+      this.screenshot = false, this.error = false;
+      axios.post('/api/login', {
+        login_domain: this.login_domain,
+        login_password: this.login_password
+      })
+      .then(() => {
+        this.screenshot = res.data.screenshot;
+      })
+      .catch(() => {
+        this.error = 'さくらインターネットにログインできませんでした\nドメイン名・パスワードをもう一度確認してください';
+      });
     }
   }
 });
