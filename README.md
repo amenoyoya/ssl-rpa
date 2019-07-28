@@ -110,6 +110,10 @@ $ uwsgi --ini uwsgi.ini &
 # copy nginx config file
 $ sudo cp ssl-rpa.conf /etc/nginx/conf.d/
 
+# set your server settings
+$ sudo vim /etc/nginx/conf.d/ssl-rpa.conf
+## => ...
+
 # restart nginx
 $ sudo systemctl restart nginx.service
 ```
