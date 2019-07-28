@@ -10,30 +10,42 @@ new Vue({
   delimiters: ["[[", "]]"],
   data() {
     return {
+      is_processing: false, // Ajax通信中
+      // メッセージ
+      info: '',
+      error: '',
+      // コンパネログイン用
       login_domain: '',
       login_password: '',
-      is_processing: false, // Ajax通信中
-      screenshot: false,
-      error: false
+      // SSL申請用
+      domains: ['']
     }
   },
   methods: {
-    login() {
+    /* 対象ドメイン追加 */
+    addDomain() {
+      this.domains.push('');
+    },
+
+    /* 申請実行 */
+    apply() {
       // show loading
       const loader = this.$loading.show();
       this.is_processing = true;
       // reset data
-      this.screenshot = false, this.error = false;
+      this.info = '', this.error = '';
       // post api
-      axios.post('/api/login', {
+      axios.post('/api/apply', {
         login_domain: this.login_domain,
-        login_password: this.login_password
+        login_password: this.login_password,
+        domains: this.domains
       })
       .then((res) => {
-        this.screenshot = res.data.screenshot;
+        this.info = res.data.info;
+        this.error = res.data.error;
       })
       .catch((err) => {
-        this.error = 'さくらインターネットにログインできませんでした\nドメイン名・パスワードをもう一度確認してください';
+        this.error = err.response.data.error;
       })
       .then((res) => {
         // hide loading

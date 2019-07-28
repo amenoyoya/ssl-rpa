@@ -27,6 +27,8 @@ def sakura_apply_lets_encrypt(driver: ChromeDriver, domain: str) -> bool:
 
 # ---
 
+INTERVAL: int = 5 # SSL申請のインターバル（秒）
+
 # flask application
 app = Flask(__name__)
 
@@ -37,11 +39,15 @@ def home() -> Tuple[str, int]:
         scripts=['/static/js/home.js']
     )
 
-# login api: /api/login
-@app.route('/api/login', methods=['POST'])
+# login api: /api/apply
+@app.route('/api/apply', methods=['POST'])
 def login_api() -> Tuple[str, int]:
-    res: dict = {'status': 200}
-
+    res: dict = {
+        'status': 200,
+        'info': '',
+        'error': ''
+    }
+    
     @use_chrome_driver({
         'driver': './driver/chromedriver75.exe' if is_windows() else './driver/chromedriver75',
         'headless': True
@@ -49,36 +55,24 @@ def login_api() -> Tuple[str, int]:
     def main(driver: ChromeDriver) -> None:
         # ログイン
         if sakura_login(driver, request.json['login_domain'], request.json['login_password']):
-            res['screenshot'] = 'data:image/png;base64,' + driver.find_element_by_xpath('//body').screenshot_as_base64
+            # res['screenshot'] = 'data:image/png;base64,' + driver.find_element_by_xpath('//body').screenshot_as_base64
+            pass
         else:
             res['status'] = 401
+            res['error'] = 'さくらインターネットのコントロールパネルにログインできませんでした\nログインドメイン名・パスワードが正しいか確認してください'
+            return None
         # 対象ドメインをSSL登録申請
-        '''
-        for domain in config.target_domains:
-            time.sleep(config.interval) # 負荷軽減
+        for domain in request.json['domains']:
+            if domain == '': 
+                # ドメイン名が入力されていないならスキップ
+                continue
+            time.sleep(INTERVAL) # 負荷軽減
             if sakura_apply_lets_encrypt(driver, domain):
-                print("Let's Encrypt applied: ", domain)
+                res['info'] += f"Let's Encrypt applied: {domain}\n"
             else:
-                err: str = "Failed to apply Let's Encrypt: " + domain
-                print(err)
-                logging.error(err)
-        '''
-    return jsonify(res), res['status']
-
-# test api: /api/test
-@app.route('/api/test', methods=['GET'])
-def test_api() -> Tuple[str, int]:
-    res: dict = {}
+                res['error'] += f"Failed to apply Let's Encrypt: {domain}\n"
     
-    @use_chrome_driver({
-        'driver': './driver/chromedriver75.exe' if is_windows() else './driver/chromedriver75',
-        'headless': True,
-        'size': (1960, 1024)
-    })
-    def api(driver: ChromeDriver) -> None:
-        load_url(driver, 'https://google.co.jp')
-        res['screenshot'] = 'data:image/png;base64,' + driver.find_element_by_xpath('//body').screenshot_as_base64
-    return jsonify(res)
+    return jsonify(res), res['status']
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=2001, debug=True)
