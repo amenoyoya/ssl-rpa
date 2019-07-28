@@ -12,18 +12,18 @@
     <div class="field">
         <label class="label">ドメイン名</label>
         <div class="control">
-            <input class="input is-primary" type="text" placeholder="example.sakura.ne.jp" v-model:value="login_domain">
+            <input class="input is-primary" type="text" placeholder="example.sakura.ne.jp" v-model:value="login_domain" :disabled="is_processing">
         </div>
     </div>
     <div class="field">
         <label class="label">パスワード</label>
         <div class="control">
-            <input class="input is-primary" type="password" v-model:value="login_password">
+            <input class="input is-primary" type="password" v-model:value="login_password" :disabled="is_processing">
         </div>
     </div>
     <div class="field">
         <div class="control">
-            <button class="button is-link" @click="login">ログイン</button>
+            <button class="button is-link" @click="login" :disabled="is_processing">ログイン</button>
         </div>
     </div>
     <div v-if="screenshot">

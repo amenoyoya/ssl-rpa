@@ -1,11 +1,8 @@
-import logging, time
+import time
 from typing import Tuple
 from lib.arch import is_windows
 from lib.webd import ChromeDriver, use_chrome_driver, load_url
 from flask import Flask, render_template, jsonify, request
-
-# ログ設定
-logging.basicConfig(filename='./error.log', level=logging.ERROR)
 
 # さくらインターネット｜ログイン: (ChromeDriver, str, str) -> bool
 def sakura_login(driver: ChromeDriver, domain: str, password: str) -> bool:

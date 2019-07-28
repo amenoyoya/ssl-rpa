@@ -11,6 +11,8 @@
 ### Environment
 - **開発環境**
     - OS: Ubuntu 18.04 LTS
+    - Node.js: `10.15.3`
+        - yarn: `1.16.0`
     - Python: `3.7.3`
         - Selenium: `3.141.0`
         - Flask: `1.1.1`
@@ -29,6 +31,12 @@ $ pip install -r requirements.txt
 
 # change executable chromedriver's permission
 $ chmod 755 ./driver/chromedriver75
+
+# install node packages
+$ yarn install
+
+# run webpack in watch mode (auto compile ./src/home.js)
+$ yarn start
 ```
 
 ### Prepare server environment
