@@ -19,9 +19,11 @@
     - Google Chrome: `75.0`
 - **サーバー環境**
     - OS: CentOS 7
+    - nginx: `1.16.0`
     - Python: `3.6.5`
         - Selenium: `3.141.0`
         - Flask: `1.1.1`
+        - uWSGI: `2.0.18`
     - Google Chrome: `75.0`
 
 ### Prepare development environment
@@ -41,6 +43,22 @@ $ yarn start
 
 ### Prepare server environment
 ```bash
+# --- Install nginx ---
+$ sudo rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+$ sudo yum -y update nginx-release-centos
+$ sudo yum -y --enablerepo=nginx install nginx
+
+# confirm version
+$ nginx -v
+nginx version: nginx/1.16.0
+
+# register nginx service
+$ sudo systemctl enable nginx.service
+
+# start nginx
+$ sudo systemctl start nginx.service
+
+
 # --- Install Python ---
 # install required modules
 $ sudo yum update -y && yum upgrade
@@ -63,6 +81,9 @@ $ pyenv versions
   system
 * 3.6.5 (set by /usr/local/src/pyenv/version)
 
+# install python packages
+$ pip install -r requirements.txt
+
 
 # --- Install Google Chrome ---
 # install google chrome
@@ -79,7 +100,18 @@ $ sudo yum install -y google-chrome-stable
 
 # cofirm google-chrome version
 $ google-chrome --version
-## => Google Chrome 75.0.3770.142 
+Google Chrome 75.0.3770.142
+
+
+# --- Setup web server ---
+# run uwsgi
+$ uwsgi --ini uwsgi.ini &
+
+# copy nginx config file
+$ sudo cp ssl-rpa.conf /etc/nginx/conf.d/
+
+# restart nginx
+$ sudo systemctl restart nginx.service
 ```
 
 ***
