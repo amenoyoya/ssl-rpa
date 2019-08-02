@@ -133,3 +133,28 @@ $ sudo systemctl restart nginx.service
 ### 無料SSL証明書登録自動化
 - 無料SSL証明書（Let's Encrypt）: https://secure.sakura.ad.jp/rscontrol/rs/freessl?SNIDomain=<ドメイン名>
     - 申請ボタン: `//button[@type="submit"]`
+
+### 独自SSL証明書インストール自動化
+- 目的:
+    - さくら以外の認証局からSSL認証をしてもらった場合の証明書インストール自動化（SNI SSL）
+- 条件:
+    - SSL証明書および中間証明書を発行済
+- 登録画面（使わない）: https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain=<ドメイン名>
+- 証明書のインストール: https://secure.sakura.ad.jp/rscontrol/rs/ssl?Install=1&SNIDomain=<ドメイン名>
+    - 入力ボックス: `//textbox[@name="Cert"]`
+        ```ssl
+        -----BEGIN CERTIFICATE-----
+        RandomText
+        -----END CERTIFICATE-----
+        ```
+    - 送信ボタン: `//input[@name="Submit_install"]`
+        - => 成功した場合: https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain=<ドメイン名> に遷移
+- 中間証明書のインストール: https://secure.sakura.ad.jp/rscontrol/rs/ssl?CACert=1&SNIDomain=<ドメイン名>
+    - 入力ボックス: `//textbox[@name="Cert"]`
+        ```ssl
+        -----BEGIN CERTIFICATE-----
+        RandomText
+        -----END CERTIFICATE-----
+        ```
+    - 送信ボタン: `//input[@name="Submit_cacert"]`
+        - => 成功した場合: https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain=<ドメイン名> に遷移
