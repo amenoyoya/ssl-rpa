@@ -25,6 +25,42 @@ def sakura_apply_lets_encrypt(driver: ChromeDriver, domain: str) -> bool:
     buttons[0].submit()
     return True
 
+# 独自SSL証明書インストール（SNI SSL）: (ChromeDriver, str, str) -> bool
+def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool:
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?Install=1&SNIDomain={domain}')
+    boxes: list = driver.find_elements_by_xpath('//textbox[@name="Cert"]')
+    if len(boxes) == 0:
+        return False
+    # 証明書記入 -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE-----
+    boxes[0].send_keys(cert)
+    # 送信
+    buttons: list = driver.find_elements_by_xpath('//input[@name="Submit_install"]')
+    if len(buttons) == 0:
+        return False
+    buttons[0].submit()
+    # インストールされたら https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain} にいるはず
+    if driver.current_url != f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain}':
+        return False
+    return True
+
+# 独自SSL中間証明書インストール: (ChromeDriver, str, str) -> bool
+def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool:
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?CACert=1&SNIDomain={domain}')
+    boxes: list = driver.find_elements_by_xpath('//textbox[@name="Cert"]')
+    if len(boxes) == 0:
+        return False
+    # 証明書記入 -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE-----
+    boxes[0].send_keys(cert)
+    # 送信
+    buttons: list = driver.find_elements_by_xpath('//input[@name="Submit_cacert"]')
+    if len(buttons) == 0:
+        return False
+    buttons[0].submit()
+    # インストールされたら https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain} にいるはず
+    if driver.current_url != f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain}':
+        return False
+    return True
+
 # ---
 
 INTERVAL: int = 5 # SSL申請のインターバル（秒）
@@ -39,7 +75,14 @@ def home() -> Tuple[str, int]:
         scripts=['/static/js/home.js']
     )
 
-# login api: /api/apply
+# apply api: /api/apply
+'''
+request: {
+    login_domain: str = コンパネログイン用ドメイン
+    login_password: str = コンパネログイン用パスワード
+    domains: List[str] = SSL申請するドメイン名配列
+}
+'''
 @app.route('/api/apply', methods=['POST'])
 def login_api() -> Tuple[str, int]:
     res: dict = {
