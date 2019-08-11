@@ -1,7 +1,4 @@
-import sys, os
-sys.path.append(os.path.dirname(__file__))
-
-import time
+import os, time
 from typing import Tuple
 from lib.arch import is_windows
 from lib.webd import ChromeDriver, use_chrome_driver, load_url
