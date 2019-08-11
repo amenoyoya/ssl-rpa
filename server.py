@@ -1,4 +1,4 @@
-import os, time
+import time
 from typing import Tuple
 from lib.arch import is_windows
 from lib.webd import ChromeDriver, use_chrome_driver, load_url
@@ -64,10 +64,10 @@ def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool
 # ---
 
 INTERVAL: int = 5 # SSL申請のインターバル（秒）
-ROOT_URL: str = os.environ.get('ROOT_URL', '/') # ベースURL
 
 # ベースURLのルーティング関数
-url_for = lambda url: ROOT_URL + url
+## ベースURL: uWSGI環境変数から読み込み
+url_for = lambda url: request.environ.get('ROOT_URL', '/') + url
 
 # flask application
 app = Flask(__name__)
