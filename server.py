@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.path.dirname(__file__))
+
 import time
 from typing import Tuple
 from lib.arch import is_windows
@@ -118,4 +121,4 @@ def login_api() -> Tuple[str, int]:
     return jsonify(res), res['status']
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False)
+    app.run(host='0.0.0.0', debug=True)
