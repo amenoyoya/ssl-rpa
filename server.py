@@ -67,15 +67,22 @@ def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool
 # ---
 
 INTERVAL: int = 5 # SSL申請のインターバル（秒）
+ROOT_URL: str = os.environ.get('ROOT_URL', '/') # ベースURL
+
+# ベースURLのルーティング関数
+url_for = lambda url: ROOT_URL + url
 
 # flask application
 app = Flask(__name__)
+
+# url_for関数を上書き
+app.jinja_env.globals.update(url_for = url_for)
 
 # home: /
 @app.route('/', methods=['GET'])
 def home() -> Tuple[str, int]:
     return render_template('home.jinja',
-        scripts=['/static/js/home.js']
+        scripts=[url_for('static/js/home.js')]
     )
 
 # apply api: /api/apply

@@ -23668,7 +23668,7 @@ new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
       // reset data
       this.info = '', this.error = '';
       // post api
-      axios.post('/api/apply', {
+      axios.post(url_for('api/apply'), {
         login_domain: this.login_domain,
         login_password: this.login_password,
         domains: this.domains
