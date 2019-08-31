@@ -1,66 +1,52 @@
 const path = require('path');
-// vue-loader plugin
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  mode: 'development',
-  entry: "./src/home.js",
+  mode: 'production', // 開発: development, 本番: production
+  entry: './src/home.js', // コンパイルのエントリーポイントファイル
+  // 出力先パス（絶対パス指定）
   output: {
-    filename: 'home.js',
-    path: path.join(__dirname, 'static/js')
+    path: path.join(__dirname, 'static', 'js'),
+    filename: 'home.js'
   },
-  devtool: 'inline-soruce-map',
   module: {
+    // コンパイル設定
     rules: [
       {
-        test: /\\.js$/,
-        loader: "babel-loader",
-        options: {
-          presets: [
-            ["@babel/preset-env"]
-          ]
-        },
-        exclude: /node_modules/
+        // .js ファイル
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader', // babel-loader で ECMAScript5 にトランスコンパイル
+            options: {
+              presets: ['@babel/preset-env']　// ブラウザ環境に合わせて自動的にコンパイル
+            }
+          }
+        ]
       },
       {
+        // .vue ファイル
         test: /\.vue$/,
-        use: "vue-loader"
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader?mimetype=image/svg+xml'
-        }],
-      },
-      {
-        test: /\.woff(\d+)?(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader?mimetype=application/font-woff'
-        }],
-      },
-      {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader?mimetype=application/font-woff'
-        }],
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'url-loader?mimetype=application/font-woff'
-        }],
-      },
+        use: [
+          {
+            loader: 'vue-loader', // vue-loader で Vueコンポーネントファイルをコンパイル
+            options: {
+              loaders: {
+                js: ['babel-loader'] // .vue ファイル内の script タグを babel-loader でトランスコンパイル
+              },
+              presets: ['@babel/preset-env']
+            }
+          }
+        ]
+      }
     ]
   },
+  // import設定
   resolve: {
-    extensions: [".js", ".vue"], // .js, .vue をimport可能に
-    modules: ["node_modules"], // node_modulesディレクトリからimport可能に
+    extensions: [".js", ".vue"], // .js, .vue を import
+    modules: ["node_modules"],
     alias: {
-      vue$: 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm.js', // vue-template-compiler用
     },
   },
   plugins: [new VueLoaderPlugin()]
