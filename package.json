@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack --watch"
+    "watch": "webpack --watch"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
