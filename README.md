@@ -6,7 +6,7 @@
 
 ***
 
-## Setup
+## Setup (local version)
 
 ### Environment
 - **開発環境**
@@ -116,6 +116,32 @@ $ sudo vim /etc/nginx/conf.d/ssl-rpa.conf
 
 # restart nginx
 $ sudo systemctl restart nginx.service
+```
+
+***
+
+## Setup (Docker version)
+
+### Docker
+- **web** container:
+    - localhost:
+        - http://localhost:3333
+        - http://ssl-rpa.localhost (need nginx-proxy)
+    - From: `nginx:1.17-alpine`
+    - Nginx server
+        - port forward => docker://flask:1000
+- **flask** container:
+    - From: `python:3.7-slim`
+    - Python: `3.7`
+        - Flask: Micro web framework
+        - Selenium: Headless browser controller
+    - uWSGI: WSGI server (connect: Web server and Python + Flask)
+
+### Execution
+```bash
+# build and execute docker containers
+$ docker-compose build
+$ docker-compose up -d
 ```
 
 ***
