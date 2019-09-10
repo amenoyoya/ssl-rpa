@@ -1,0 +1,51 @@
+{% extends "elements/html5.jinja" %}
+     
+{% block title %}さくらインターネット SSL申請自動化ツール{% endblock %}
+ 
+{% block head %}
+    {{ super() }}
+    <meta description="さくらインターネットのSSL申請を自動化">
+{% endblock %}
+         
+{% block content %}
+    <h1 class="title">さくらインターネット SSL申請自動化ツール</h1>
+    <hr>
+    <h2 class="subtitle">コントロールパネル　ログイン情報</h2>
+    <div class="field">
+        <label class="label">ドメイン名</label>
+        <div class="control">
+            <input class="input is-primary" type="text" placeholder="example.sakura.ne.jp" v-model:value="login_domain" :disabled="is_processing">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">パスワード</label>
+        <div class="control">
+            <input class="input is-primary" type="password" v-model:value="login_password" :disabled="is_processing">
+        </div>
+    </div>
+    <hr>
+    <h2 class="subtitle">SSL申請するドメイン名</h2>
+    <div class="field" v-for="(domain, index) in domains">
+        <div class="control">
+            <input class="input is-info" type="text" v-model:value="domains[index]" :disabled="is_processing">
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-info" @click="addDomain" :disabled="is_processing"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+    <hr>
+    <div class="field">
+        <div class="control">
+            <button class="button is-danger" @click="apply" :disabled="is_processing">実行</button>
+        </div>
+    </div>
+    {# メッセージ出力用 #}
+    <div class="notification is-info" v-if="info != ''">
+        <pre><code>[[ info ]]</code></pre>
+    </div>
+    <div class="notification is-warning" v-if="error != ''">
+        <pre><code>[[ error ]]</code></pre>
+    </div>
+{% endblock %}
