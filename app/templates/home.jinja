@@ -14,14 +14,19 @@
     <div class="field">
         <label class="label">ドメイン名</label>
         <div class="control">
-            <input class="input is-primary" type="text" placeholder="example.sakura.ne.jp" v-model:value="login_domain" :disabled="is_processing">
+            <input class="input is-primary" type="text" placeholder="example.sakura.ne.jp" v-model="login_domain" :disabled="is_processing">
         </div>
     </div>
     <div class="field">
         <label class="label">パスワード</label>
         <div class="control">
-            <input class="input is-primary" type="password" v-model:value="login_password" :disabled="is_processing">
+            <input class="input is-primary" type="password" v-model="login_password" :disabled="is_processing">
         </div>
+    </div>
+    <div class="field">
+        <label class="checkbox">PROプラン
+            <input type="checkbox" v-model="login_as_pro" :disabled="is_processing">
+        </label>
     </div>
     <hr>
     <h2 class="subtitle">SSL申請するドメイン名</h2>

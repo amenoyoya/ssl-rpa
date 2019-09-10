@@ -17,6 +17,7 @@ new Vue({
       // コンパネログイン用
       login_domain: '',
       login_password: '',
+      login_as_pro: false,
       // SSL申請用
       domains: ['']
     }
@@ -38,6 +39,7 @@ new Vue({
       axios.post(url_for('api/apply'), {
         login_domain: this.login_domain,
         login_password: this.login_password,
+        login_as_pro: this.login_as_pro,
         domains: this.domains
       })
       .then((res) => {

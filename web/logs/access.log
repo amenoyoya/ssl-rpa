@@ -9,3 +9,7 @@
 172.17.0.2 - - [10/Sep/2019:16:14:03 +0000] "GET /static/js/home.js HTTP/1.1" 200 205333 "http://ssl-rpa.localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"
 172.17.0.2 - - [10/Sep/2019:16:14:03 +0000] "GET /favicon.ico HTTP/1.1" 404 209 "http://ssl-rpa.localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"
 172.17.0.2 - - [10/Sep/2019:16:14:13 +0000] "POST /api/apply HTTP/1.1" 401 404 "http://ssl-rpa.localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"
+172.17.0.2 - - [10/Sep/2019:16:29:04 +0000] "GET / HTTP/1.1" 200 1368 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"
+172.17.0.2 - - [10/Sep/2019:16:29:06 +0000] "GET / HTTP/1.1" 200 1368 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"
+172.17.0.2 - - [10/Sep/2019:16:29:06 +0000] "GET /static/js/home.js HTTP/1.1" 200 205380 "http://ssl-rpa.localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"
+172.17.0.2 - - [10/Sep/2019:16:29:06 +0000] "GET /favicon.ico HTTP/1.1" 404 209 "http://ssl-rpa.localhost/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36" "172.17.0.1"

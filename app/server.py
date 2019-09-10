@@ -4,30 +4,30 @@ from lib.arch import is_windows
 from lib.webd import ChromeDriver, use_chrome_driver, load_url
 from flask import Flask, render_template, jsonify, request
 
-# さくらインターネット｜ログイン: (ChromeDriver, str, str) -> bool
-def sakura_login(driver: ChromeDriver, domain: str, password: str) -> bool:
-    load_url(driver, 'https://secure.sakura.ad.jp/rscontrol/rs')
+# さくらインターネット｜ログイン: (ChromeDriver, str, str, str) -> bool
+def sakura_login(driver: ChromeDriver, domain: str, password: str, panel_name='rs') -> bool:
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/{panel_name}')
     driver.find_element_by_xpath('//input[@name="domain"]').send_keys(domain)
     driver.find_element_by_xpath('//input[@name="password"]').send_keys(password)
     driver.find_element_by_xpath('//input[@class="image"]').submit()
     # ログインできたか確認
-    load_url(driver, 'https://secure.sakura.ad.jp/rscontrol/rs')
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/{panel_name}')
     inputs: list = driver.find_elements_by_xpath('//input[@name="password"]')
     # パスワード入力ボックスがあるならログインできていない
     return len(inputs) == 0
 
-# 無料SSL証明書（Let's Encrypt）申し込み: (ChromeDriver, str) -> bool
-def sakura_apply_lets_encrypt(driver: ChromeDriver, domain: str) -> bool:
-    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/rs/freessl?SNIDomain={domain}')
+# 無料SSL証明書（Let's Encrypt）申し込み: (ChromeDriver, str, str) -> bool
+def sakura_apply_lets_encrypt(driver: ChromeDriver, domain: str, panel_name='rs') -> bool:
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/{panel_name}/freessl?SNIDomain={domain}')
     buttons: list = driver.find_elements_by_xpath('//button[@type="submit"]')
     if len(buttons) == 0:
         return False
     buttons[0].submit()
     return True
 
-# 独自SSL証明書インストール（SNI SSL）: (ChromeDriver, str, str) -> bool
-def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool:
-    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?Install=1&SNIDomain={domain}')
+# 独自SSL証明書インストール（SNI SSL）: (ChromeDriver, str, st, strr) -> bool
+def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str, panel_name='rs') -> bool:
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/{panel_name}/ssl?Install=1&SNIDomain={domain}')
     boxes: list = driver.find_elements_by_xpath('//textbox[@name="Cert"]')
     if len(boxes) == 0:
         return False
@@ -39,13 +39,13 @@ def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool
         return False
     buttons[0].submit()
     # インストールされたら https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain} にいるはず
-    if driver.current_url != f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain}':
+    if driver.current_url != f'https://secure.sakura.ad.jp/rscontrol/{panel_name}/ssl?SNIDomain={domain}':
         return False
     return True
 
-# 独自SSL中間証明書インストール: (ChromeDriver, str, str) -> bool
-def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool:
-    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?CACert=1&SNIDomain={domain}')
+# 独自SSL中間証明書インストール: (ChromeDriver, str, str, str) -> bool
+def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str, panel_name='rs') -> bool:
+    load_url(driver, f'https://secure.sakura.ad.jp/rscontrol/{panel_name}/ssl?CACert=1&SNIDomain={domain}')
     boxes: list = driver.find_elements_by_xpath('//textbox[@name="Cert"]')
     if len(boxes) == 0:
         return False
@@ -57,7 +57,7 @@ def sakura_install_sni_ssl(driver: ChromeDriver, domain: str, cert: str) -> bool
         return False
     buttons[0].submit()
     # インストールされたら https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain} にいるはず
-    if driver.current_url != f'https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain={domain}':
+    if driver.current_url != f'https://secure.sakura.ad.jp/rscontrol/{panel_name}/ssl?SNIDomain={domain}':
         return False
     return True
 
@@ -104,8 +104,9 @@ def login_api() -> Tuple[str, int]:
         'headless': True
     })
     def main(driver: ChromeDriver) -> None:
+        panel_name = 'main' if request.json['login_as_pro'] else 'rs'
         # ログイン
-        if sakura_login(driver, request.json['login_domain'], request.json['login_password']):
+        if sakura_login(driver, request.json['login_domain'], request.json['login_password'], panel_name):
             # res['screenshot'] = 'data:image/png;base64,' + driver.find_element_by_xpath('//body').screenshot_as_base64
             pass
         else:
@@ -118,11 +119,11 @@ def login_api() -> Tuple[str, int]:
                 # ドメイン名が入力されていないならスキップ
                 continue
             time.sleep(INTERVAL) # 負荷軽減
-            if sakura_apply_lets_encrypt(driver, domain):
+            if sakura_apply_lets_encrypt(driver, domain, panel_name):
                 res['info'] += f"Let's Encrypt applied: {domain}\n"
             else:
                 res['error'] += f"Failed to apply Let's Encrypt: {domain}\n"
-    
+
     return jsonify(res), res['status']
 
 if __name__ == "__main__":
