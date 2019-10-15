@@ -99,9 +99,9 @@ def login_api() -> Tuple[str, int]:
     }
     
     @use_chrome_driver({
-        'driver': './driver/chromedriver75.exe' if is_windows() else './driver/chromedriver75',
+        'driver': './driver/chromedriver77.exe' if is_windows() else './driver/chromedriver75',
         'options': ['--no-sandbox'],
-        'headless': True
+        'headless': False
     })
     def main(driver: ChromeDriver) -> None:
         panel_name = 'main' if request.json['login_as_pro'] else 'rs'
