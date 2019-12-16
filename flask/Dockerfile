@@ -5,7 +5,7 @@ ARG project_dir=/var/www/app
 
 # 必要なファイルをコンテナ内のプロジェクトディレクトリにコピー
 COPY ./requirements.txt ${project_dir}/requirements.txt
-COPY ./chromedriver76   ${project_dir}/driver/chromedriver
+COPY ./chromedriver79   ${project_dir}/driver/chromedriver
 
 WORKDIR $project_dir
 
