@@ -100,7 +100,7 @@ def login_api() -> Tuple[str, int]:
     
     @use_chrome_driver({
         'driver': './driver/chromedriver77.exe' if is_windows() else './driver/chromedriver',
-        'options': ['--no-sandbox'],
+        'options': ['--no-sandbox', '--disable-dev-shm-usage', '--headless'],
         'headless': False
     })
     def main(driver: ChromeDriver) -> None:
