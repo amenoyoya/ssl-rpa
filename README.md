@@ -32,7 +32,7 @@
 $ pip install -r requirements.txt
 
 # change executable chromedriver's permission
-$ chmod 755 ./driver/chromedriver75
+$ chmod 755 ./driver/chromedriver
 
 # install node packages
 $ yarn install

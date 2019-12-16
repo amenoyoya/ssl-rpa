@@ -5,7 +5,7 @@ ARG project_dir=/var/www/app
 
 # 必要なファイルをコンテナ内のプロジェクトディレクトリにコピー
 COPY ./requirements.txt ${project_dir}/requirements.txt
-COPY ./chromedriver75   ${project_dir}/driver/chromedriver75
+COPY ./chromedriver76   ${project_dir}/driver/chromedriver
 
 WORKDIR $project_dir
 
@@ -18,4 +18,4 @@ RUN apt-get update && apt-get install -y gcc wget gnupg && \
     : 'requirements.txtに記載されたパッケージをインストール' && \
     pip install --upgrade pip && pip install -r requirements.txt && \
     : 'chrome driver の実行権限付与' && \
-    chmod +x ./driver/chromedriver75
+    chmod +x ./driver/chromedriver
