@@ -38,7 +38,39 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        // .css ファイル: css-loader => style-loader の順に適用
+        // - css-loader: cssをJSにトランスコンパイル
+        // - style-loader: <link>タグにスタイル展開
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
+      /* アイコンloader設定 */
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'url-loader?mimetype=image/svg+xml'
+        }],
+      },
+      {
+        test: /\.woff(\d+)?(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'url-loader?mimetype=application/font-woff'
+        }],
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'url-loader?mimetype=application/font-woff'
+        }],
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'url-loader?mimetype=application/font-woff'
+        }],
+      },
     ]
   },
   // import設定
