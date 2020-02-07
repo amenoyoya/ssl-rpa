@@ -154,14 +154,17 @@ $ docker-compose up -d
     - パスワード: `//input[@name="password"]`
         - 登録パスワード入力
     - 送信（ログイン）: `//input[@class="image"]`
-- ドメイン一覧: https://secure.sakura.ad.jp/rscontrol/rs/domain
-- SSL証明書登録: https://secure.sakura.ad.jp/rscontrol/rs/ssl-entry?SNIDomain=<ドメイン名>
-    - 無料SSL証明書（Let's Encrypt）: https://secure.sakura.ad.jp/rscontrol/rs/freessl?SNIDomain=<ドメイン名>
-    - 有料SSL証明書: https://secure.sakura.ad.jp/rscontrol/rs/ssl-select?Domain=<ドメイン名>
-    - SSL証明書詳細: https://secure.sakura.ad.jp/rscontrol/rs/ssl?Domain=<ドメイン名>
+- コンパネルート:
+    - 標準プラン: https://secure.sakura.ad.jp/rscontrol/rs
+    - PROプラン: https://secure.sakura.ad.jp/rscontrol/main
+- ドメイン一覧: /domain
+- SSL証明書登録: /ssl-entry?SNIDomain=<ドメイン名>
+    - 無料SSL証明書（Let's Encrypt）: /freessl?SNIDomain=<ドメイン名>
+    - 有料SSL証明書: /ssl-select?Domain=<ドメイン名>
+    - SSL証明書詳細: /ssl?Domain=<ドメイン名>
 
 ### 無料SSL証明書登録自動化
-- 無料SSL証明書（Let's Encrypt）: https://secure.sakura.ad.jp/rscontrol/rs/freessl?SNIDomain=<ドメイン名>
+- 無料SSL証明書（Let's Encrypt）: /freessl?SNIDomain=<ドメイン名>
     - 申請ボタン: `//button[@type="submit"]`
 
 ### 独自SSL証明書インストール自動化
@@ -169,8 +172,8 @@ $ docker-compose up -d
     - さくら以外の認証局からSSL認証をしてもらった場合の証明書インストール自動化（SNI SSL）
 - 条件:
     - SSL証明書および中間証明書を発行済
-- 登録画面（使わない）: https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain=<ドメイン名>
-- 証明書のインストール: https://secure.sakura.ad.jp/rscontrol/rs/ssl?Install=1&SNIDomain=<ドメイン名>
+- 登録画面（使わない）: /ssl?SNIDomain=<ドメイン名>
+- 証明書のインストール: /ssl?Install=1&SNIDomain=<ドメイン名>
     - 入力ボックス: `//textbox[@name="Cert"]`
         ```ssl
         -----BEGIN CERTIFICATE-----
@@ -178,8 +181,8 @@ $ docker-compose up -d
         -----END CERTIFICATE-----
         ```
     - 送信ボタン: `//input[@name="Submit_install"]`
-        - => 成功した場合: https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain=<ドメイン名> に遷移
-- 中間証明書のインストール: https://secure.sakura.ad.jp/rscontrol/rs/ssl?CACert=1&SNIDomain=<ドメイン名>
+        - => 成功した場合: /ssl?SNIDomain=<ドメイン名> に遷移
+- 中間証明書のインストール: /ssl?CACert=1&SNIDomain=<ドメイン名>
     - 入力ボックス: `//textbox[@name="Cert"]`
         ```ssl
         -----BEGIN CERTIFICATE-----
@@ -187,4 +190,7 @@ $ docker-compose up -d
         -----END CERTIFICATE-----
         ```
     - 送信ボタン: `//input[@name="Submit_cacert"]`
-        - => 成功した場合: https://secure.sakura.ad.jp/rscontrol/rs/ssl?SNIDomain=<ドメイン名> に遷移
+        - => 成功した場合: /ssl?SNIDomain=<ドメイン名> に遷移
+
+### ログ設定自動化
+- アクセスログの設定: /logging
