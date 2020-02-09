@@ -1,39 +1,24 @@
-version: '3'
+version: "3"
 
 services:
-  web:
-    build: ./web
-    links:
-      - flask # flaskコンテナとリンク
+  # express web server
+  express:
+    build:
+      context: ./docker/express # ./docker/express/Dockerfile をビルド
+      args:
+        # Docker実行ユーザIDをビルド時に使用
+        UID: $UID
     volumes:
-      - ./app:/var/www/app # アプリケーション開発ディレクトリ
-      # nginx設定
-      - ./web/nginx.conf:/etc/nginx/nginx.conf
-      - ./web/logs:/etc/nginx/logs
-    network_mode: bridge # nginx-proxyにリバースプロキシしてもらうために同一ネットワーク内に置く
-    command: nginx -g 'daemon off;' -c /etc/nginx/nginx.conf
+      # アプリケーション開発ディレクトリ
+      - ./app/:/home/node/app/
     environment:
       TZ: Asia/Tokyo
       # VIRTUAL_HOST設定（nginx-proxy）
-      VIRTUAL_HOST: ssl-rpa.localhost # http://ssl-rpa.localhost => docker://web:80
-      VIRTUAL_PORT: 80
-      # SSL化設定（letsencrypt-nginx-proxy-companion）
-      LETSENCRYPT_HOST: ssl-rpa.localhost
-      LETSENCRYPT_EMAIL: admin@ssl-rpa.localhost
-      CERT_NAME: default # 本番環境ではコメントアウト
+      CERT_NAME: default # ローカル開発時は自己証明書を使う
+      VIRTUAL_HOST: web.local # http://web.local/ => docker://express:3333
+      VIRTUAL_PORT: 3333
   
-  flask:
-    build: ./flask
-    volumes:
-      - ./app:/var/www/app # アプリケーション開発ディレクトリ
-    network_mode: bridge   # nginx-proxyにリバースプロキシしてもらうために同一ネットワーク内に置く
-    # uWSGI Emperor を使って複数のFlaskサーバーを起動できるようにする
-    command: uwsgi --master --die-on-term --emperor /var/www/app/vassals/*.ini
-    environment:
-      TZ: Asia/Tokyo
-  
-  # nginx-proxy, letsencrypt
-  ## 以下は本番環境では別コンテナで動かす想定
+  # vhostプロキシサーバ
   nginx-proxy:
     image: jwilder/nginx-proxy
     privileged: true # ルート権限
@@ -44,27 +29,21 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - /usr/share/nginx/html
       - /etc/nginx/vhost.d
-      - ./certs:/etc/nginx/certs:ro # letsencryptコンテナが ./certs/ に作成したSSL証明書を読む
-    # restart: always # Dockerサービス起動時に自動起動
-    # 他のコンテナを見つけられるようにブリッジモードにする（見つけて欲しいコンテナもブリッジモードにする）
-    ## もしくは共有のネットワークを作成する
-    network_mode: bridge
+      - ./docker/certs:/etc/nginx/certs:ro # letsencryptコンテナが ./docker/certs/ に作成したSSL証明書を読む
     environment:
       DHPARAM_GENERATION: "false"
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
 
-  # 無料SSL証明書発行
+  # 無料SSL証明書発行コンテナ
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /usr/share/nginx/html
       - /etc/nginx/vhost.d
-      - ./certs:/etc/nginx/certs:rw # ./certs/ にSSL証明書を書き込めるように rw モードで共有
+      - ./docker/certs:/etc/nginx/certs:rw # ./docker/certs/ にSSL証明書を書き込めるように rw モードで共有
     depends_on:
       - nginx-proxy # nginx-proxyコンテナの後で起動
-    # restart: always # Dockerサービス起動時に自動起動
-    network_mode: bridge
     environment:
       NGINX_PROXY_CONTAINER: nginx-proxy

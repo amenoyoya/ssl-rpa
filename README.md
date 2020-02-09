@@ -202,4 +202,5 @@ $ docker-compose up -d
     - ホスト名の情報:
         - 残す: `//input[@name="VHost" and @value="1"]`
         - 残さない: `//input[@name="VHost" and @value="0"]`
+    - 送信ボタン: `//input[@type="image"]`
     

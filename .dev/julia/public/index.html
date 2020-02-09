@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動作確認用フォーム</title>
+</head>
+<body>
+    <form id="testform">
+        <label for="server">サーバタイプ</label>
+        <input type="radio" name="server" value="apache" checked>Apache
+        <input type="radio" name="server" value="nginx">Nginx
+        <label for="cache">キャッシュ期間</label>
+        <select name="cache">
+            <option value="100" checked>100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+        </select>
+        <button type="submit">送信</button>
+    </form>
+    <div id="result"></div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $('#testform').submit(function(event) {
+        event.preventDefault();
+        $.post({
+            url: '/api/server',
+            data: $(event.currentTarget).serialize(),
+            dataType: 'json',
+            success: function(res) {
+                $('#result').html('<hr>サーバ: ' + res[0].server + ', キャッシュ期間: ' + res[1].cache);
+            }
+        })
+    });
+</script>
+
+</html>
