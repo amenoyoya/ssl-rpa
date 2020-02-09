@@ -9,15 +9,14 @@ module.exports = {
    * @param option: dict puppeteer起動オプション
    * @param callback: function(page) => null puppeteer実行関数
    */
-  puppet(option, callback) {
-    puppeteer.launch(option).then(async browser => {
-      const page = await browser.newPage();
-      if (option.viewport !== undefined ) {
-        await page.setViewport(option.viewport);
-      }
-      await callback(page);
-      browser.close();
-    });
+  async puppet(option, callback) {
+    const browser = await puppeteer.launch(option);
+    const page = await browser.newPage();
+    if (option.viewport !== undefined ) {
+      await page.setViewport(option.viewport);
+    }
+    await callback(page);
+    await browser.close();
   },
 
   /**
@@ -107,7 +106,7 @@ module.exports = {
     await page.goto(`${panel_url}logging`, {
       waitUntil: 'domcontentloaded'
     });
-    if (logging !== null) {
+    if (logging !== null && logging !== undefined) {
       await page.click(`input[name="logging"][value="${logging? 1: 0}"]`);
       if (logging) {
         await page.evaluate(() => {
@@ -127,7 +126,7 @@ module.exports = {
       }
       await page.select('select[name="month"]', rotation.toString());
     }
-    if (hostinfo !== null) {
+    if (hostinfo !== null && hostinfo !== undefined) {
       await page.click(`input[name="VHost"][value="${hostinfo? 1: 0}"]`);
     }
     // 設定保存ボタンクリック

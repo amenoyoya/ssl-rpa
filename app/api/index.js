@@ -3,6 +3,7 @@
  */
 const express = require('express');
 const router = express.Router();
+const sakura = require('./sakura');
 
 /**
  * POST / == /api/
@@ -17,15 +18,32 @@ const router = express.Router();
  *   }
  * }
  * @response {
- *   login: "standard"|"pro"|"failed",
+ *   login_result: "standard"|"pro"|"failed",
  *   ssl_results: array[boolean],
  *   logging_result: boolean
  * }
  */
-router.get('/', (req, res) => {
-  res.json({
-    message: 'Hello, Express!'
+router.post('/', async (req, res) => {
+  const response = {};
+
+  await sakura.puppet({}, async page => {
+    if (req.body.login_user && req.body.login_passwd) {
+      // ログイン
+      const panel_url = await sakura.login(page, req.body.login_user, req.body.login_passwd);
+      response.login_result = sakura.getLoginStatus(panel_url);
+      // SSL申請
+      if (Array.isArray(req.body.ssl_target_domains)) {
+        response.ssl_results = await sakura.requestSslDomains(page, panel_url, req.body.ssl_target_domains);
+      }
+      // ロギング設定
+      if (typeof req.body.logging === 'object') {
+        response.logging_result = await sakura.changeLogging(
+          page, panel_url, req.body.logging.log, req.body.logging.rotation, req.body.logging.hosts
+        );
+      }
+    }
   });
+  res.json(response);
 })
 
 // export
