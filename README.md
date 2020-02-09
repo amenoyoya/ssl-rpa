@@ -194,3 +194,12 @@ $ docker-compose up -d
 
 ### ログ設定自動化
 - アクセスログの設定: /logging
+    - アクセスログの保存設定:
+        - 残す: `//input[@name="logging" and @value="1"]`
+            - エラーログも残す（チェックボックス）: `//input[@name="errlog"]`
+        - 残さない: `//input[@name="logging" and @value="0"]`
+    - アクセスログの保存期間: `//select[@name="month"]` => option: 1-24
+    - ホスト名の情報:
+        - 残す: `//input[@name="VHost" and @value="1"]`
+        - 残さない: `//input[@name="VHost" and @value="0"]`
+    
